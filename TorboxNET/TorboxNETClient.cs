@@ -10,6 +10,7 @@ public class TorboxNETClient
 {
     private readonly Store _store = new();
     public Torrents Torrents;
+    public User User;
 
     public TorboxNETClient(String apiKey, HttpClient? httpClient = null)
     {
@@ -17,5 +18,7 @@ public class TorboxNETClient
         
         _store.ApiKey = apiKey;
         Torrents = new Torrents(client, _store);
+        User = new User(client, _store);
+
     }
 }
