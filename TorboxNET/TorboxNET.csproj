@@ -6,6 +6,13 @@
         <Nullable>enable</Nullable>
         <AssemblyName>TorboxNET</AssemblyName>
         <RootNamespace>TorboxNET</RootNamespace>
+        <Title>Torbox.NET</Title>
+        <Authors>ffejhog</Authors>
+        <Description>A C3 Wrapper for the torbox.app api</Description>
+        <RepositoryUrl>https://github.com/ffejhog/TorBox.NET</RepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/ffejhog/TorBox.NET</PackageProjectUrl>
+        <RepositoryType>GitHub</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
