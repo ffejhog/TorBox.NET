@@ -83,7 +83,17 @@ public class Torrents
 
         return result;
     }
-
+    
+    /// <summary>
+    /// Controls a torrent. By sending the torrent's ID and the type of operation you want to perform, it will send that request to the torrent client.
+    /// </summary>
+    /// <param name="torrentId">The torrent's id.</param>
+    /// <param name="operation">"reannounce" reannounces the torrent to get new peers
+    ///                         "delete" deletes the torrent from the client and your account permanently
+    ///                         "pause" pauses a torrent's upload or download
+    ///                         "resume" resumes a paused torrent </param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns></returns>
     public async Task ControlTorrentAsync(
         String torrentId,
         String operation,
@@ -97,6 +107,16 @@ public class Torrents
         await _requests.PostRequestJsonAsync("api/torrents/controltorrent", data,true, cancellationToken);
     }
     
+    /// <summary>
+    /// Controls a Queued torrent. By sending the torrent's ID and the type of operation you want to perform, it will send that request to the torrent client.
+    /// </summary>
+    /// <param name="queuedId">The queued torrent's id.</param>
+    /// <param name="operation">"reannounce" reannounces the torrent to get new peers
+    ///                         "delete" deletes the torrent from the client and your account permanently
+    ///                         "pause" pauses a torrent's upload or download
+    ///                         "resume" resumes a paused torrent </param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns></returns>
     public async Task ControlQueuedTorrentAsync(
         String queuedId,
         String operation,
@@ -110,6 +130,14 @@ public class Torrents
         await _requests.PostRequestJsonAsync("api/torrents/controlqueued", data,true, cancellationToken);
     }
     
+    /// <summary>
+    /// Requests the download link from the server. Because downloads are metered, TorBox cannot afford to allow free access to the links directly. This endpoint opens the link for 1 hour for downloads.
+    /// </summary>
+    /// <param name="torrentId">The torrent's id.</param>
+    /// <param name="fileId">The file Id's to download(If null all are downloaded</param>
+    /// <param name="zip">If you want a zip link. Required if no file_id. Takes precedence over file_id if both are given.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns>A link to the file or zip of files</returns>
     public async Task<String> RequestDownloadLink(
         String torrentId,
         String? fileId = null,
@@ -135,6 +163,11 @@ public class Torrents
         return response;
     }
     
+    /// <summary>
+    /// Gets the user's torrent list. This gives you the needed information to perform other torrent actions.
+    /// </summary>
+    /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+    /// <returns></returns>
     public async Task<IList<TorrentItem>> GetTorrentListAsync(CancellationToken cancellationToken = default)
     {
         var parameters = new Dictionary<String, String>
