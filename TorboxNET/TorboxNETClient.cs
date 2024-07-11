@@ -9,11 +9,13 @@ namespace TorboxNET;
 public class TorboxNETClient
 {
     private readonly Store _store = new();
+    public Torrents Torrents;
 
     public TorboxNETClient(String apiKey, HttpClient? httpClient = null)
     {
         var client = httpClient ?? new HttpClient();
         
         _store.ApiKey = apiKey;
+        Torrents = new Torrents(client, _store);
     }
 }
